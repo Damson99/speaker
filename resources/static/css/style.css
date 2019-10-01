@@ -1,0 +1,510 @@
+#login .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  max-width: 600px;
+  height: 320px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+}
+
+#dropDownMenu1, #dropDownMenu2, #dropDownMenu3, #dropDownMenu4
+{
+    margin-left:8px;
+    max-width:525px;
+    display: none;
+}
+
+#scroll1,#scroll2,#scroll3,#scroll4
+{
+    margin:8px;
+}
+
+.scrollCom
+{
+    margin-top:5;
+}
+
+.scrollMedia, .scrollCom
+{
+    width:auto;
+    cursor:pointer;
+    float:right;
+}
+
+.scrollMedia
+{
+    margin-top:-24px;
+    font-size:16px;
+}
+
+.com
+{
+    display:none;
+}
+
+.comments-list
+{
+    max-height:200px;
+    overflow: auto;
+}
+
+.notification
+{
+    height:auto;
+    background-color:#007bff;
+}
+
+.notification:hover
+{
+    background-color:#004a99;
+}
+
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+
+body
+{
+    transition: background-color .5s;
+}
+        .alert
+        {
+            margin-left:40%;
+        }
+		.card
+		{
+        	height: 500px;
+        	border-radius: 15px !important;
+        	background-color: rgba(0,0,0,0.4) !important;
+        }
+		.contacts_body{
+			padding:  0.75rem 0 !important;
+			overflow-y: auto;
+			white-space: nowrap;
+		}
+		.msg_card_body{
+			overflow-y: auto;
+		}
+		.card-header{
+			border-radius: 15px 15px 0 0 !important;
+			border-bottom: 0 !important;
+		}
+	 .card-footer{
+		border-radius: 0 0 15px 15px !important;
+			border-top: 0 !important;
+	}
+		.container{
+		    margin-top:60px;
+			align-content: center;
+		}
+		#toMove1
+		{
+		    margin-top: -60px;
+		}
+		.search{
+			border-radius: 15px 0 0 15px !important;
+			background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color:white !important;
+		}
+		.search:focus{
+		     box-shadow:none !important;
+           outline:0px !important;
+		}
+		.type_msg{
+			background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color:white !important;
+			height: 60px !important;
+			overflow-y: auto;
+		}
+			.type_msg:focus{
+		     box-shadow:none !important;
+           outline:0px !important;
+		}
+		.attach_btn{
+	border-radius: 15px 0 0 15px !important;
+	background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color: white !important;
+			cursor: pointer;
+		}
+		.send_btn{
+	border-radius: 0 15px 15px 0 !important;
+	background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color: white !important;
+			cursor: pointer;
+		}
+		.search_btn{
+			border-radius: 0 15px 15px 0 !important;
+			background-color: rgba(0,0,0,0.3) !important;
+			border:0 !important;
+			color: white !important;
+			cursor: pointer;
+		}
+		.contacts{
+			list-style: none;
+			padding: 0;
+		}
+		.contacts li{
+			width: 100% !important;
+			padding: 5px 10px;
+			margin-bottom: 15px !important;
+		}
+	.active{
+			background-color: rgba(0,0,0,0.3);
+	}
+		.user_img{
+			height: 70px;
+			width: 70px;
+			border:1.5px solid #f5f6fa;
+
+		}
+		.user_img_msg{
+			height: 40px;
+			width: 40px;
+			border:1.5px solid #f5f6fa;
+
+		}
+	.img_cont{
+			position: relative;
+			height: 70px;
+			width: 70px;
+	}
+	.img_cont_msg{
+			height: 40px;
+			width: 40px;
+	}
+	.online_icon{
+		position: absolute;
+		height: 15px;
+		width:15px;
+		background-color: #4cd137;
+		border-radius: 50%;
+		bottom: 0.2em;
+		right: 0.4em;
+		border:1.5px solid white;
+	}
+	.offline{
+		background-color: #c23616 !important;
+	}
+	.user_info{
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-left: 15px;
+	}
+	.user_info span{
+		font-size: 20px;
+		color: white;
+	}
+	.user_info p{
+	font-size: 10px;
+	color: rgba(255,255,255,0.6);
+	}
+	.video_cam{
+		margin-left: 50px;
+		margin-top: 5px;
+	}
+	.video_cam span{
+		color: white;
+		font-size: 20px;
+		cursor: pointer;
+		margin-right: 20px;
+	}
+	.msg_cotainer{
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-left: 10px;
+		border-radius: 25px;
+		background-color: #82ccdd;
+		padding: 10px;
+		position: relative;
+	}
+	.msg_cotainer_send{
+		margin-top: auto;
+		margin-bottom: auto;
+		margin-right: 10px;
+		border-radius: 25px;
+		background-color: #78e08f;
+		padding: 10px;
+		position: relative;
+	}
+	.msg_time{
+		position: absolute;
+		left: 0;
+		bottom: -15px;
+		color: rgba(255,255,255,0.5);
+		font-size: 10px;
+	}
+	.msg_time_send{
+		position: absolute;
+		right:0;
+		bottom: -15px;
+		color: rgba(255,255,255,0.5);
+		font-size: 10px;
+	}
+	.msg_head{
+		position: relative;
+	}
+	#action_menu_btn{
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		color: white;
+		cursor: pointer;
+		font-size: 20px;
+	}
+	.action_menu{
+		z-index: 1;
+		position: absolute;
+		padding: 15px 0;
+		background-color: rgba(0,0,0,0.5);
+		color: white;
+		border-radius: 15px;
+		top: 30px;
+		right: 15px;
+		display: none;
+	}
+	.action_menu ul{
+		list-style: none;
+		padding: 0;
+	margin: 0;
+	}
+	.action_menu ul li{
+		width: 100%;
+		padding: 10px 15px;
+		margin-bottom: 5px;
+	}
+	.action_menu ul li i{
+		padding-right: 10px;
+
+	}
+	.action_menu ul li:hover{
+		cursor: pointer;
+		background-color: rgba(0,0,0,0.2);
+	}
+	@media(max-width: 576px){
+        .contacts_card{
+            margin-bottom: 15px !important;
+        }
+	}
+
+	.card-body contacts_body{
+	    background-color: #007bff !important;
+	}
+
+	.profile img.image-lg{
+        z-index: 0;
+        margin-bottom: 10px;
+        max-width:80%;
+        max-height:500px;
+        overflow:hidden;
+    }
+
+    .image-profile
+    {
+        margin: -90px 10px 0px 50px;
+        z-index: 9;
+        width: 25%;
+    }
+
+.tabcontent
+{
+    background-color:black;
+}
+
+#mySidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1002;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  margin-left:-500px;
+}
+
+#mySidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+#mySidenav a:hover {
+  color: #f1f1f1;
+}
+
+#mySidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#toMove1, #toMove2, #toMove3
+{
+  transition: margin-left .5s;
+}
+
+@media screen and (max-height: 450px) {
+  #mySidenav {padding-top: 15px;}
+  #mySidenav a {font-size: 18px;}
+}
+
+.profileCard
+{
+    margin:10px;
+    height: auto;
+    background-color: #ddd !important;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.header
+{
+  padding: 30px;
+  text-align: center;
+  background: white;
+}
+
+.searchMain
+{
+    color: white;
+    outline: 0;
+    width: 50%;
+    box-sizing: border-box;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: transparent;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 5px 10px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.searchMain:focus
+{
+    width: 100%;
+}
+
+.searchMain::placeholder
+{
+    color:white;
+}
+
+.searchResults
+{
+    margin-left:30px;
+    position:absolute;
+    color:white;
+}
+
+.username
+{
+    display:none;
+}
+
+.header h1 {
+  font-size: 50px;
+}
+
+.topnav
+{
+  min-height:62px;
+  margin-top:100px;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav button
+{
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+}
+
+.leftcolumn
+{
+    float: left;
+    width: 60%;
+}
+
+#isLiked
+{
+    font-size: 2rem;
+    position:absolute;
+    margin:-45px 0px 0px 52px;
+}
+
+.rightcolumn {
+  float: left;
+  width: 36%;
+  background-color: #f1f1f1;
+  margin-left: 20px;
+}
+
+.fakeimg {
+  background-color: #aaa;
+  width: 103.1%;
+  max-height: 600px;
+  overflow:hidden;
+  margin-left: -1.6%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1100px)
+{
+    #usernameField
+    {
+        display:none;
+    }
+}
+
+@media screen and (max-width: 800px)
+{
+  .leftcolumn
+  {
+    width: 95%;
+    margin-left: 2.5%;
+  }
+  .rightcolumn
+  {
+    width: 94.5%;
+    margin-left: 2.7%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .topnav button
+  {
+    float: none;
+    width: 100%;
+  }
+}

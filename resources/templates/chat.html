@@ -1,0 +1,205 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Speaker</title>
+    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/speakerIcon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script th:src="@{/js/sendMessage.js}"></script>
+    <script th:src="@{/js/connect.js}"></script>
+    <script th:src="@{/js/disconnect.js}"></script>
+    <script th:src="@{/js/showMessageOutput.js}"></script>
+    <script th:src="@{/js/userSearch.js}"></script>
+    <script th:src="@{/js/tab.js}"></script>
+    <script th:src="@{/js/sideNav.js}"></script>
+</head>
+
+<body background="background.jpg" th:onload="'openChat(event, '+${user.id}+')'">
+
+    <nav class="navbar navbar-dark bg-primary" id="toMove1" style="width:100%;z-index:1001;margin-top:0px;">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+        <a th:href="${'/'}" class="btn btn-secondary btn-lg active" role="button">Speaker</a>
+
+        <h2>Welcome <a th:href="${'/userProfile?id='+user.id}" th:text="${user.username}" class="btn btn-outline-light my-2 my-sm-0"></a></h2>
+
+        <form action="#" th:action="@{/logout}" method="post" style="margin-top:16px;">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Log out</button>
+        </form>
+        <a th:if="${user.email==null}" th:href="@{/login}" class="btn btn-outline-light my-2 my-sm-0">Log in</a>
+        <a th:if="${user.email==null}" th:href="@{/registration}" class="btn btn-outline-light my-2 my-sm-0">Register here</a>
+
+
+    </nav>
+
+    <div class="alert alert-info" th:if="${message!=null}" style="position:absolute;">
+        <center><strong th:text="${message}"></strong></center>
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a th:if="${privileges=='[ADMIN]'}" th:href="@{/usersAdminList}">Admin page</a>
+        <a th:href="${'/'}">Main page</a>
+        <a th:href="${'/chat'}">Chat</a>
+        <a th:href="${'/userProfile?id='+user.id}">My profile</a>
+        <a th:href="@{/login}">Log out</a>
+
+        <h5 style="color:white;margin:20px auto 20px auto;width:200px;">Notifications</h5>
+
+        <hr style="border: 1px solid white;">
+        <div class="scrollbar scrollbar-pink bordered-pink thin" style="width:200px;margin:auto;">
+            <div class="force-overflow">
+                <p style="color:white;font-size:15px;">People who invited you</p>
+                <div th:each="friend : ${friends}" th:if="${friend.confirm==false}" class="topnav" style="margin-top:5px;padding:8px;float:left;">
+                    <img th:src="@{((${friend.profile}=='') ? @{/nonprofile.png} : ${'/uploads/'+friend.profile})}" class="rounded-circle user_img_msg" style="border:none;margin-bottom:5px;">
+                    <a th:href="${'userProfile?id='+friend.userId}" th:text="${friend.username}" style="color:white;font-size:15px;float:right;"></a><br>
+                    <a th:href="${'userInvitedYou/allow/'+user.id+'/'+friend.userId}" class="btn btn-outline-primary" style="font-size:12px;float:left;">allow</a>
+                    <a th:href="${'userInvitedYou/decline/'+user.id+'/'+friend.userId}" class="btn btn-outline-primary" style="font-size:12px;float:right;">decline</a>
+                </div>
+            </div>
+        </div>
+        <hr style="border: 1px solid white;">
+    </div>
+
+    <div class="container-fluid h-100">
+
+        <div class="row justify-content-center h-100">
+
+            <div class="col-md-8 col-xl-6 chat" style="margin-top:150px;">
+
+                <div th:each="singleuser : ${allusers}" th:id="${singleuser.id}" class="tabcontent">
+
+                    <div class="card-header msg_head">
+
+                        <div class="d-flex bd-highlight">
+                            <!--HEADER CHAT-->
+
+                            <div class="img_cont">
+                                <a th:href="${'/userProfile?id='+singleuser.id}">
+                                    <img th:src="@{((${singleuser.profile}=='') ? @{/nonprofile.png} : ${'/uploads/'+singleuser.profile})}" class="rounded-circle user_img" style="border:none;">
+                                </a>
+                                <span class="online_icon"></span>
+                            </div>
+
+                            <div class="user_info">
+                                <span><a th:href="${'/userProfile?id='+singleuser.id}" th:text="${singleuser.username}" style="color:white"></a></span>
+                                <p th:each="score : ${scoremessages}" th:if="${score.identifier_message==user.id+':'+singleuser.id || score.identifier_message==singleuser.id+':'+user.id}" th:text="${score.total_messages+' messages'}"></p>
+                            </div>
+
+                            <div class="video_cam">
+                                <span><i class="fas fa-video"></i></span>
+                                <span><i class="fas fa-phone"></i></span>
+                            </div>
+
+                        </div>
+                        <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+
+                        <div class="action_menu">
+                            <ul>
+                                <li><i class="fas fa-user-circle"></i> View profile</li>
+                                <li><i class="fas fa-users"></i> Add to close friends</li>
+                                <li><i class="fas fa-ban"></i> Block</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card-body msg_card_body">
+
+                        <div th:each="usermessage : ${usermessages}" th:if="${usermessage.identifier_message==user.id+':'+singleuser.id || usermessage.identifier_message==singleuser.id+':'+user.id}">
+                            <div th:if="${usermessage.sender!=user.id}" class="d-flex justify-content-start mb-4">
+                                <div class="img_cont_msg">
+                                    <img th:src="@{((${singleuser.profile}=='') ? @{/nonprofile.png} : ${'/uploads/'+singleuser.profile})}" class="rounded-circle user_img_msg" style="border:none;">
+                                </div>
+
+                                <div class="msg_cotainer" id="response">
+                                    <p th:text="${usermessage.message}" style="margin-bottom:0px;"></p>
+                                    <span th:text="${usermessage.time}" class="msg_time"></span>
+                                </div>
+                            </div>
+
+                            <div th:if="${usermessage.sender==user.id}" class="d-flex justify-content-end mb-4">
+                                <div class="msg_cotainer_send">
+                                    <p th:text="${usermessage.message}" style="margin-bottom:0px;"></p>
+                                    <span th:text="${usermessage.time}" class="msg_time_send"></span>
+                                </div>
+
+                                <div class="img_cont_msg">
+                                    <img th:src="@{((${user.profile}=='') ? @{/nonprofile.png} : ${'/uploads/'+user.profile})}" class="rounded-circle user_img_msg" style="border:none;">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card-footer">
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+                                </div>
+                                <textarea th:id="'messageField'+${singleuser.id}" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                                <div class="input-group-append">
+                                    <span class="input-group-text send_btn" th:onclick="'sendMessage('+${user.id}+', '+${singleuser.id}+');'">
+                                        <i class="fas fa-location-arrow"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3 chat"><div class="card mb-sm-3 mb-md-0 contacts_card" style="margin-top:150px;">
+
+                <div class="card-header">
+
+                    <div class="input-group">
+
+                        <input type="text" onkeyup="searchUser()" id="searchInput" placeholder="Search..." name="" class="form-control search">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-body contacts_body">
+
+                    <ul class="contacts" id="searchUl">
+
+                        <li th:each="singleuser : ${allusers}" class="active">
+
+                            <div th:onclick="'openChat(event, '+${singleuser.id}+')'" class="d-flex bd-highlight" style="background-color:black;cursor:pointer;">
+
+                                <div class="img_cont">
+                                    <img th:src="@{((${singleuser.profile}=='') ? @{/nonprofile.png} : ${'/uploads/'+singleuser.profile})}" class="rounded-circle user_img" style="border:none;">
+                                    <!--<span th:class="@{((${isonline}==${singleuser.email}) ? ${'online_icon'} : ${'online_icon offline'})}"></span>-->
+                                </div>
+
+                                <div class="user_info">
+                                    <span>
+                                        <a th:href="${'/userProfile?id='+singleuser.id}" th:text="${singleuser.username}" class="username" style="color:white;"></a>
+                                    </span>
+                                    <p>online</p>
+                                    <p th:if="${privileges=='[ADMIN]'}" style="margin-top:-20px;">
+                                        <a th:href="${'/chat/user/enable/'+singleuser.id+'/'+singleuser.enabled}" th:text="((${singleuser.enabled}==true) ? 'block' : 'unblock')" style="color:red;"></a>
+                                    </p>
+                                    <p th:if="${privileges=='[ADMIN]'}" style="margin-top:-20px;">
+                                        <a th:href="${'/chat/user/delete/'+singleuser.id}" th:text="delete" style="color:red;"></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer"></div>
+            </div></div>
+        </div>
+    </div>
+</body>
+</html>

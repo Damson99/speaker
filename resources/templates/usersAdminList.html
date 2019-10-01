@@ -1,0 +1,79 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Administration</title>
+    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/speakerIcon.png">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:src="@{/js/userSearch.js}"></script>
+    <script th:src="@{/js/sideNav.js}"></script>
+</head>
+
+<body background="background.jpg">
+
+    <nav class="navbar navbar-dark bg-primary" id="toMove1" style="position:fixed;width:100%;z-index:1001;">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+        <a th:href="${'/'}" class="btn btn-secondary btn-lg active" role="button">Speaker</a>
+
+        <form action="#" th:action="@{/logout}" method="post" style="margin-top:16px;">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Log out</button>
+        </form>
+    </nav>
+
+    <div class="alert alert-info" th:if="${message!=null}" id="toMove2" style="position:absolute;">
+        <center><strong th:text="${message}"></strong></center>
+    </div>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a th:href="${'/'}">Main page</a>
+        <a th:href="${'/chat'}">Chat</a>
+        <a th:href="@{/login}">Log out</a>
+    </div>
+
+    <div class="container">
+
+        <div class="card-header">
+
+            <div class="input-group" style="margin-top:100px;">
+                <input type="text" onkeyup="searchUser()" id="searchInput" placeholder="Search..." class="form-control search">
+                <div class="input-group-prepend">
+                    <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-dark table-hover" id="searchUl">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Enabled</th>
+                    <th>privileges</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+
+            <tbody th:each="singleuser : ${usersAdminList}" class="active">
+                <tr th:each="role : ${usersRole}" th:if="${singleuser.email==role.email}">
+                    <td th:text="${singleuser.id}"></td>
+                    <td><a th:href="${'/userProfile?id='+singleuser.id}" th:text="${singleuser.username}" class="username"></a></td>
+                    <td th:text="${singleuser.email}"></td>
+                    <td><a th:href="${'/userProfile/user/enable/'+singleuser.id+'/'+singleuser.enabled}" th:text="((${singleuser.enabled}==true) ? 'block' : 'unblock')"></a></td>
+                    <td th:if="${role.email==singleuser.email && role.role=='USER'}"><a th:href="${'/userProfile/user/setAdmin/'+singleuser.email}" th:text="${role.role}"></a></td>
+                    <td th:if="${role.email==singleuser.email && role.role=='ADMIN'}"><a th:href="${'/userProfile/user/setUser/'+singleuser.email}" th:text="${role.role}"></a></td>
+                    <td><a th:href="${'/userProfile/user/delete/'+singleuser.id}">delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

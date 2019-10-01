@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Register Form</title>
+    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body background="background.jpg">
+
+    <nav class="navbar navbar-dark bg-primary" style="width:100%;z-index:1001;">
+        <a th:href="${'/'}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Speaker</a>
+    </nav>
+
+    <div id="login">
+        <h3 class="text-center text-white pt-5">Register form</h3>
+
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12" style="height:auto;margin-top:-50px;" >
+
+                        <form id="login-form" class="form" th:action="@{/registration}" th:object="${user}" method="post" enctype="utf8">
+                            <h3 class="text-center text-info">Register</h3>
+
+                            <div class="form-group">
+                                <label class="text-info">Email</label><br>
+                                <input th:field="*{email}" type="email" class="form-control">
+                                <p th:each="error : ${#fields.errors('email')}"
+                                   th:text="${error}">Validation error</p>
+                                <p th:text="${error}"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="text-info">Nickname</label><br>
+                                <input th:field="*{username}" type="text" class="form-control">
+                                <p th:each="error : ${#fields.errors('username')}"
+                                   th:text="${error}">Validation error</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password</label><br>
+                                <input th:field="*{password}" type="password" id="password" class="form-control">
+                                <p th:each="error : ${#fields.errors('password')}"
+                                   th:text="${error}">Validation error</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Register">
+                            </div>
+
+                            <div id="register-link" class="text-right">
+                                <a href="/login" class="text-info">Log in here</a>
+                            </div><br>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
