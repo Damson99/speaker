@@ -26,6 +26,13 @@
 
         <a th:href="${'/'}" class="btn btn-secondary btn-lg active" role="button">Speaker</a>
 
+        <form th:action="@{/searchResults}" method="post" style="width:20%;margin:0px;">
+            <div class="input-group-prepend">
+                <input name="searchUser" type="search" class="searchMain" placeholder="Search...">
+                <button class="input-group-text search_btn" style="background-color:transparent!important;"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+
         <h2>Welcome <a th:href="${'/userProfile?id='+user.id}" th:text="${user.username}" class="btn btn-outline-light my-2 my-sm-0"></a></h2>
 
         <form action="#" th:action="@{/logout}" method="post" style="margin-top:16px;">
@@ -56,7 +63,7 @@
             <div class="force-overflow">
                 <p style="color:white;font-size:15px;">People who invited you</p>
                 <div th:each="friend : ${friends}" th:if="${friend.confirm==false}" class="topnav" style="margin-top:5px;padding:8px;float:left;">
-                    <img th:src="@{((${friend.profile}=='') ? @{/nonprofile.png} : ${'/uploads/'+friend.profile})}" class="rounded-circle user_img_msg" style="border:none;margin-bottom:5px;">
+                    <img th:src="@{((${friend.profile}=='') ? @{/nonprofile.png} : ${'/uploads/'+friend.profile})}" class="rounded-circle user_img_msg" style="margin-bottom:5px;border:none;">
                     <a th:href="${'userProfile?id='+friend.userId}" th:text="${friend.username}" style="color:white;font-size:15px;float:right;"></a><br>
                     <a th:href="${'userInvitedYou/allow/'+user.id+'/'+friend.userId}" class="btn btn-outline-primary" style="font-size:12px;float:left;">allow</a>
                     <a th:href="${'userInvitedYou/decline/'+user.id+'/'+friend.userId}" class="btn btn-outline-primary" style="font-size:12px;float:right;">decline</a>

@@ -21,20 +21,12 @@
 
         <a th:href="${'/'}" class="btn btn-secondary btn-lg active" role="button">Speaker</a>
 
-        <div style="width:20%;margin:0px;">
+        <form th:action="@{/searchResults}" method="post" style="width:20%;margin:0px;">
             <div class="input-group-prepend">
-                <span class="input-group-text search_btn" style="background-color:transparent!important;"><i class="fas fa-search"></i>
-                </span>
-                <input type="text" onkeyup="mainSearchUser()" id="searchInput" class="searchMain" placeholder="Search...">
+                <input name="searchUser" type="search" class="searchMain" placeholder="Search...">
+                <button class="input-group-text search_btn" style="background-color:transparent!important;"><i class="fas fa-search"></i></button>
             </div>
-            <div id="searchUl">
-                <div th:each="singleUser : ${allUsers}" class="searchResults">
-                    <div>
-                        <a th:href="${'userProfile?id='+singleUser.id}" th:text="${singleUser.username}" class="username"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
 
         <a th:if="${user.email!=null}" th:href="${'/userProfile?id='+user.id}" id="usernameField" th:text="${user.username}" class="btn btn-outline-light my-2 my-sm-0"></a>
 

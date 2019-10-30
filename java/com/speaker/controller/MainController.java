@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +78,76 @@ public class MainController
         model.addAttribute("userPosts", userPosts);
         model.addAttribute("postLikes", postLikes);
         model.addAttribute("postComments", postComments);
-        return "main";
+        return "/main";
+    }
+
+    @PostMapping("/searchResults")
+    public String searchResults(Model model, @RequestParam("searchUser") String username)
+    {
+        Object isLogged = "";
+        User user = new User();
+        try
+        {
+            isLogged = webSecurityConfig.isUserLogged();
+            if(isLogged!=null)
+            {
+                String userEmail = webSecurityConfig.getLoggedUserEmail();
+                user = userService.findUserByEmail(userEmail);
+                if(!user.isEnabled())
+                {
+                    return "redirect:/logout";
+                }
+
+                Integer id = user.getId();
+                List<FriendsDTO> friends = userService.findUserFriends(id);
+
+                String friend = "Add friend";
+                for(FriendsDTO isFriend : friends)
+                {
+                    if(user.getId().equals(isFriend.getUserId()))
+                    {
+                        if(isFriend.isConfirm())
+                        {
+                            friend = "Remove friend";
+                        }
+                        else
+                        {
+                            friend = "Request sent";
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        friend = "Add friend";
+                    }
+                }
+
+                model.addAttribute("friend", friend);
+                model.addAttribute("friends", friends);
+            }
+            else
+            {
+                user = null;
+            }
+        }
+        catch (ClassCastException ex)
+        {
+
+        }
+
+        List<User> users = mainService.findUserByUsername(username);
+
+        if(users.equals("") || users==null)
+        {
+            String emptyRecord = "No users with this username";
+            model.addAttribute("message", emptyRecord);
+        }
+        else
+        {
+            model.addAttribute("users", users);
+        }
+
+        model.addAttribute("user", user);
+        return "/searchResults";
     }
 }

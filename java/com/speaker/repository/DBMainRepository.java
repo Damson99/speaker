@@ -1,5 +1,6 @@
 package com.speaker.repository;
 
+import com.speaker.model.User;
 import com.speaker.model.UserPost;
 import com.speaker.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,20 @@ public class DBMainRepository implements MainService
             userPosts = null;
         }
         return userPosts;
+    }
+
+    @Override
+    public List<User> findUserByUsername(String username)
+    {
+        List<User> users;
+        try
+        {
+            users = entityManager.createQuery("FROM User WHERE username LIKE '"+username+"%'", User.class).getResultList();
+        }
+        catch (NoResultException e)
+        {
+            users = null;
+        }
+        return users;
     }
 }

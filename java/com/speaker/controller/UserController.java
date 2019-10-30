@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -111,14 +112,17 @@ public class UserController
     {
         String userEmail = webSecurityConfig.getLoggedUserEmail();
         User user = userService.findUserByEmail(userEmail);
-        userProfile = userService.findUserById(id);
         if(!user.isEnabled()) return "redirect:/logout";
         Object privileges = webSecurityConfig.userPrivileges();
+        Integer userId = user.getId();
+
+        userProfile = userService.findUserById(id);
 
         List<UserPost> userPosts = userService.findUserPosts(id);
+        List<PostLikes> userLikes = userService.findUserLikes(userId);
         List<FriendsDTO> friends = userService.findUserFriends(id);
+        List<FriendsDTO> invitedYou = userService.findUsersInvitedYou(userId);
         List<PostLikes> postLikes = userService.findUserPostLikes();
-        List<PostLikes> userLikes = userService.findUserLikes(id);
         List<PostComments> postComments = userService.findUserPostComments();
 
         String friend = "Add friend";
@@ -129,7 +133,7 @@ public class UserController
                 friend = "";
                 break;
             }
-            if(user.getId().equals(isFriend.getUserId()) && userProfile.getId().equals(isFriend.getFriendId()))
+            if(user.getId().equals(isFriend.getUserId()))
             {
                 if(isFriend.isConfirm())
                 {
@@ -158,7 +162,7 @@ public class UserController
         model.addAttribute("userProfile", userProfile);
         model.addAttribute("friend", friend);
         model.addAttribute("friends", friends);
-        model.addAttribute("usersInvitedYou", friends);
+        model.addAttribute("invitedYou", invitedYou);
         model.addAttribute("countFriends", countFriends);
         model.addAttribute("userPosts", userPosts);
         model.addAttribute("postLikes", postLikes);

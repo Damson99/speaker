@@ -252,4 +252,20 @@ public class DBUserRepository implements UserService
         }
         return friends;
     }
+
+    @Override
+    public List<FriendsDTO> findUsersInvitedYou(Integer userId)
+    {
+        List<FriendsDTO> friends;
+        try
+        {
+            friends = entityManager.createQuery("SELECT NEW com.speaker.model.FriendsDTO(f.userId, f.friendId, f.confirm, u.username, u.profile)" +
+                    " FROM Friends f LEFT JOIN User u ON f.userId=u.id WHERE f.friendId=:id AND f.confirm=false", FriendsDTO.class).setParameter("id", userId).getResultList();
+        }
+        catch(NoResultException e)
+        {
+            friends = null;
+        }
+        return friends;
+    }
 }

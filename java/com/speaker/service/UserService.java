@@ -53,4 +53,6 @@ public interface UserService
     List<PostComments> findUserPostComments();
 
     List<FriendsDTO> findUserFriends(Integer userId);
+
+    List<FriendsDTO> findUsersInvitedYou(Integer userId);
 }
