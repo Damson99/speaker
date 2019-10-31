@@ -57,7 +57,7 @@
         <div class="scrollbar scrollbar-pink bordered-pink thin" style="width:200px;margin:auto;">
             <div class="force-overflow">
                 <p style="color:white;font-size:15px;">People who invited you</p>
-                <div th:each="friend : ${friends}" class="topnav" style="margin-top:5px;padding:8px;float:left;">
+                <div th:each="friend : ${friends}" th:if="${friend.confirm==false}" class="topnav" style="margin-top:5px;padding:8px;float:left;">
                     <img th:src="@{((${friend.profile}=='') ? @{/nonprofile.png} : ${'/uploads/'+friend.profile})}" class="rounded-circle user_img_msg" style="margin-bottom:5px;border:none;">
                     <a th:href="${'userProfile?id='+friend.userId}" th:text="${friend.username}" style="color:white;font-size:15px;float:right;"></a><br>
                     <a th:href="${'userInvitedYou/allow/'+user.id+'/'+friend.userId}" class="btn btn-outline-primary" style="font-size:12px;float:left;">allow</a>
@@ -94,11 +94,6 @@
                                     <a th:href="${'/userProfile?id='+singleUser.id}" th:text="${singleUser.username}" class="username"></a>
                                     <a th:each="singleFriend : ${friends}" th:if="${singleFriend.friendId!=user.id && singleFriend.userId!=user.id && singleFriend.confirm!=true}"
                                        th:href="${'/userProfile/addFriend/'+user.id+'/'+singleUser.id}" class="btn btn-success">+</a>
-
-                                    <!--<a th:if="${singleUser.id!=user.id && friend=='Add friend' && friend!=''}"
-                                       th:href="${'/userProfile/addFriend/'+user.id+'/'+singleUser.id}" class="btn btn-success">+</a>
-                                    <a th:if="${friend!='' && singleUser.id!=user.id && friend=='Remove friend' || friend=='Request sent'}"
-                                       th:href="${'/userProfile/removeFriend/'+user.id+'/'+singleUser.userId}" class="btn btn-danger">-</a>-->
                                 </span>
                             </div>
                         </div>
