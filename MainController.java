@@ -78,7 +78,7 @@ public class MainController
         model.addAttribute("userPosts", userPosts);
         model.addAttribute("postLikes", postLikes);
         model.addAttribute("postComments", postComments);
-        return "/";
+        return "/main";
     }
 
     @PostMapping("/searchResults")
