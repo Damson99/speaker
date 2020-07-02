@@ -32,7 +32,7 @@ public class UserPost
     private String userProfile;
 
 
-    public UserPost(Integer id, @NotNull String datePosted, @NotNull Integer userId, String description, @NotNull String pic, Integer countLikes, Integer countComments, String username, String userProfile) {
+    private UserPost(Integer id, @NotNull String datePosted, @NotNull Integer userId, String description, @NotNull String pic, Integer countLikes, Integer countComments, String username, String userProfile) {
         this.id = id;
         this.datePosted = datePosted;
         this.userId = userId;
@@ -43,6 +43,72 @@ public class UserPost
         this.username = username;
         this.userProfile = userProfile;
     }
+
+
+    public static class UserPostBuilder
+    {
+        private Integer id;
+        private String datePosted;
+        private Integer userId;
+        private String description;
+        private String pic;
+        private Integer countLikes;
+        private Integer countComments;
+        private String username;
+        private String userProfile;
+
+        public UserPostBuilder setId(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public UserPostBuilder setDatePosted(String datePosted) {
+            this.datePosted = datePosted;
+            return this;
+        }
+
+        public UserPostBuilder setUserId(Integer userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public UserPostBuilder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public UserPostBuilder setPic(String pic) {
+            this.pic = pic;
+            return this;
+        }
+
+        public UserPostBuilder setCountLikes(Integer countLikes) {
+            this.countLikes = countLikes;
+            return this;
+        }
+
+        public UserPostBuilder setCountComments(Integer countComments) {
+            this.countComments = countComments;
+            return this;
+        }
+
+        public UserPostBuilder setUsername(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public UserPostBuilder setUserProfile(String userProfile) {
+            this.userProfile = userProfile;
+            return this;
+        }
+
+
+        public UserPost build()
+        {
+            return new UserPost(id, datePosted, userId, description, pic, countLikes, countComments, username, userProfile);
+        }
+    }
+
 
     public Integer getId() {
         return id;

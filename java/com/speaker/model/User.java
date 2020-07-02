@@ -33,9 +33,75 @@ public class User
     private boolean enabled;
 
 
-    public User()
-    {
+    private User(Integer id, String email, String username, String password, String profile, String backgroundPic, String description, boolean enabled) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.profile = profile;
+        this.backgroundPic = backgroundPic;
+        this.description = description;
+        this.enabled = enabled;
+    }
 
+
+    public static class UserBuilder
+    {
+        private Integer id;
+        private String email;
+        private String username;
+        private String password;
+        private String profile;
+        private String backgroundPic;
+        private String description;
+        private boolean enabled;
+
+        public UserBuilder setId(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public UserBuilder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public UserBuilder setUsername(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public UserBuilder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder setProfile(String profile) {
+            this.profile = profile;
+            return this;
+        }
+
+        public UserBuilder setBackgroundPic(String backgroundPic) {
+            this.backgroundPic = backgroundPic;
+            return this;
+        }
+
+        public UserBuilder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public UserBuilder setEnabled(boolean enabled) {
+            this.enabled = enabled;
+            return this;
+        }
+
+
+
+        public User build()
+        {
+            return new User(id, email, username, password, profile, backgroundPic, description, enabled);
+        }
     }
 
 

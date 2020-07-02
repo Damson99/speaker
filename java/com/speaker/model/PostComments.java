@@ -26,7 +26,7 @@ public class PostComments
     private String userProfile;
 
 
-    public PostComments(Integer id, @NotNull Integer postId, @NotNull Integer userId, @NotNull String description, String username, String userProfile) {
+    private PostComments(Integer id, @NotNull Integer postId, @NotNull Integer userId, @NotNull String description, String username, String userProfile) {
         this.id = id;
         this.postId = postId;
         this.userId = userId;
@@ -34,6 +34,53 @@ public class PostComments
         this.username = username;
         this.userProfile = userProfile;
     }
+
+    public static class PostCommentsBuilder
+    {
+        private Integer id;
+        private Integer postId;
+        private Integer userId;
+        private String description;
+        private String username;
+        private String userProfile;
+
+        public PostCommentsBuilder setId(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public PostCommentsBuilder setPostId(Integer postId) {
+            this.postId = postId;
+            return this;
+        }
+
+        public PostCommentsBuilder setUserId(Integer userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public PostCommentsBuilder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public PostCommentsBuilder setUsername(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public PostCommentsBuilder setUserProfile(String userProfile) {
+            this.userProfile = userProfile;
+            return this;
+        }
+
+
+        public PostComments build()
+        {
+            return new PostComments(id, postId, userId, description, username, userProfile);
+        }
+    }
+
 
     public Integer getId() {
         return id;
